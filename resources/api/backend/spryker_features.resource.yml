@@ -1,0 +1,23 @@
+resource:
+    name: SprykerFeatures
+    shortName: spryker-features
+    description: Spryker Features configuration API for Backend operations
+
+    provider: Spryker\Glue\KernelFeature\Api\Backend\Provider\SprykerFeaturesBackendProvider
+
+    paginationItemsPerPage: 50
+
+    operations:
+        - type: Get
+        - type: GetCollection
+
+    properties:
+        sprykerFeatureName:
+            type: string
+            description: The unique name of the Spryker feature
+            identifier: true
+
+        configuration:
+            type: object
+            description: The configuration object for the feature
+            writable: false

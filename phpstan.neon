@@ -1,0 +1,13 @@
+parameters:
+    level: 8
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+        - '#Call to an undefined method Spryker\\Zed\\Kernel\\Locator::#'
+        - '#Call to an undefined method Generated\\Zed\\Ide\\AutoCompletion&Spryker\\Shared\\Kernel\\LocatorLocatorInterface::#'
+    dynamicConstantNames:
+        - APPLICATION
+        - APPLICATION_ENV
+        - APPLICATION_STORE
+        - APPLICATION_CODE_BUCKET

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="SprykerFeaturesBackendApiAttributes" strict="true">
+        <property name="sprykerFeatureName" type="string"/>
+        <property name="configuration" type="array" singular="configurationItem"/>
+    </transfer>
+
+    <transfer name="SprykerFeature" strict="true">
+        <property name="sprykerFeatureName" type="string"/>
+        <property name="configuration" type="array" singular="configurationItem"/>
+    </transfer>
+
+    <transfer name="SprykerFeatureCollection" strict="true">
+        <property name="sprykerFeatures" type="SprykerFeature[]" singular="sprykerFeature"/>
+    </transfer>
+
+    <transfer name="SprykerFeatureCriteria" strict="true">
+        <property name="sprykerFeatureName" type="string"/>
+        <property name="entityName" type="string"/>
+    </transfer>
+
+    <transfer name="SprykerFeatureValidationResult" strict="true">
+        <property name="isValid" type="bool"/>
+        <property name="featureName" type="string"/>
+        <property name="errors" type="string[]" singular="error"/>
+    </transfer>
+
+    <transfer name="User">
+    </transfer>
+
+    <transfer name="OauthAccessTokenValidationRequest">
+    </transfer>
+
+</transfers>

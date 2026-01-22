@@ -1,0 +1,231 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://spryker.com/schemas/entity-config.json",
+    "title": "Spryker Entity Configuration Schema",
+    "description": "JSON Schema for Spryker entity configuration YAML files",
+    "type": "object",
+    "required": ["entity", "fields"],
+    "properties": {
+        "entity": {
+            "type": "string",
+            "description": "Entity name in PascalCase",
+            "pattern": "^[A-Z][a-zA-Z0-9]*$"
+        },
+        "navigation": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Navigation title displayed in UI"
+                }
+            }
+        },
+        "fields": {
+            "type": "object",
+            "description": "Entity field definitions",
+            "patternProperties": {
+                "^[a-zA-Z][a-zA-Z0-9]*$": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": ["string", "email", "date", "select", "hidden", "number", "boolean", "text"],
+                            "default": "string",
+                            "description": "Field data type"
+                        },
+                        "label": {
+                            "type": "string",
+                            "description": "Human-readable field label"
+                        },
+                        "required": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether field is required (default: false)"
+                        },
+                        "readonly": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Whether field is read-only"
+                        },
+                        "searchable": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Include field in search"
+                        },
+                        "filterable": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Enable filtering by this field"
+                        },
+                        "format": {
+                            "type": "string",
+                            "description": "Display format (e.g., 'dd.MM.y' for dates)"
+                        },
+                        "datasource": {
+                            "type": "object",
+                            "description": "Dynamic data source for select fields",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": ["http", "inline"],
+                                    "default": "http"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "description": "API endpoint URL for fetching options"
+                                },
+                                "valueField": {
+                                    "type": "string",
+                                    "default": "value",
+                                    "description": "Field name for option value"
+                                },
+                                "titleField": {
+                                    "type": "string",
+                                    "default": "title",
+                                    "description": "Field name for option display text"
+                                }
+                            },
+                            "required": ["url"]
+                        },
+                        "validators": {
+                            "type": "object",
+                            "description": "Field validation rules",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean"
+                                },
+                                "email": {
+                                    "type": "boolean"
+                                },
+                                "min": {
+                                    "type": "number"
+                                },
+                                "max": {
+                                    "type": "number"
+                                },
+                                "pattern": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "ui": {
+            "type": "object",
+            "description": "UI configuration",
+            "properties": {
+                "mode": {
+                    "type": "string",
+                    "enum": ["crud", "custom"],
+                    "default": "crud",
+                    "description": "UI mode: 'crud' for auto-generated CRUD, 'custom' for manual component definition"
+                },
+                "list": {
+                    "type": "object",
+                    "description": "List/table configuration",
+                    "properties": {
+                        "columns": {
+                            "type": "array",
+                            "description": "Columns to display in table",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "rowAction": {
+                            "type": "string",
+                            "description": "Row click action: 'edit' to open edit drawer, empty to disable"
+                        },
+                        "pagination": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "sizes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    },
+                                    "default": [5, 10, 20],
+                                    "description": "Available page size options"
+                                }
+                            }
+                        },
+                        "search": {
+                            "type": "object",
+                            "properties": {
+                                "placeholder": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "create": {
+                    "type": "object",
+                    "description": "Create form configuration",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "fields": {
+                            "type": "array",
+                            "description": "Fields to include in create form",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "submitLabel": {
+                            "type": "string",
+                            "default": "Create"
+                        }
+                    }
+                },
+                "edit": {
+                    "type": "object",
+                    "description": "Edit form configuration",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "fields": {
+                            "type": "array",
+                            "description": "Fields to include in edit form",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "submitLabel": {
+                            "type": "string",
+                            "default": "Edit"
+                        }
+                    }
+                },
+                "delete": {
+                    "type": "object",
+                    "description": "Delete form configuration",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "submitLabel": {
+                            "type": "string",
+                            "default": "Delete"
+                        }
+                    }
+                }
+            }
+        },
+        "view": {
+            "type": "object",
+            "description": "Legacy view configuration (for backward compatibility)"
+        }
+    }
+}
