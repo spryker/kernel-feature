@@ -4,6 +4,9 @@ parameters:
     ignoreErrors:
         -
             identifier: missingType.iterableValue
+        # Defensive programming: type checks kept for runtime safety
+        -
+            identifier: function.alreadyNarrowedType
         - '#Call to an undefined method Spryker\\Zed\\Kernel\\Locator::#'
         - '#Call to an undefined method Generated\\Zed\\Ide\\AutoCompletion&Spryker\\Shared\\Kernel\\LocatorLocatorInterface::#'
     dynamicConstantNames:
