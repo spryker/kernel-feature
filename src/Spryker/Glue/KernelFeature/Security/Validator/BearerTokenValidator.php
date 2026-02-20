@@ -29,7 +29,7 @@ class BearerTokenValidator implements SecurityValidatorInterface
     {
         $authorizationHeader = $request->headers->get(static::HEADER_AUTHORIZATION);
         if ($authorizationHeader === null) {
-            return ValidationResult::success();
+            return ValidationResult::error(401, 'Authorization header is required');
         }
 
         $tokenParts = explode(' ', $authorizationHeader, 2);

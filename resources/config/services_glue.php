@@ -11,11 +11,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Spryker\Glue\KernelFeature\Security\AclAccessChecker;
 use Spryker\Glue\KernelFeature\Security\AclAccessCheckerInterface;
-use Spryker\Glue\KernelFeature\Security\AuthenticatedProvider;
+use Spryker\Glue\KernelFeature\Security\Listener\AuthenticationRequestListener;
 use Spryker\Glue\KernelFeature\Security\Validator\AclValidator;
 use Spryker\Glue\KernelFeature\Security\Validator\BearerTokenValidator;
 use Spryker\Glue\KernelFeature\Security\Validator\SecurityValidatorChain;
-use Spryker\Glue\KernelFeature\Security\Validator\SecurityValidatorInterface;
 use Spryker\Zed\Acl\Business\AclFacade;
 use Spryker\Zed\Acl\Business\AclFacadeInterface;
 use Spryker\Zed\Oauth\Business\OauthFacade;
@@ -38,21 +37,21 @@ return static function (ContainerConfigurator $container): void {
     // ACL Access Checker
     $services->set(AclAccessCheckerInterface::class, AclAccessChecker::class);
 
-    // Tag all security validators
-    $services->instanceof(SecurityValidatorInterface::class)
-        ->tag('kernel_feature.security_validator');
-
-    // Security validators
-    $services->set(BearerTokenValidator::class, BearerTokenValidator::class);
-    $services->set(AclValidator::class, AclValidator::class);
+    // Security validators - explicitly tagged
+    $services->set(BearerTokenValidator::class, BearerTokenValidator::class)
+        ->tag('kernel_feature.security_validator', ['priority' => 100]);
+    $services->set(AclValidator::class, AclValidator::class)
+        ->tag('kernel_feature.security_validator', ['priority' => 50]);
 
     // Security validator chain
     $services->set(SecurityValidatorChain::class, SecurityValidatorChain::class)
         ->arg('$validators', tagged_iterator('kernel_feature.security_validator'));
 
-    // AuthenticatedProvider - decorates API Platform state provider
-    $services->set(AuthenticatedProvider::class, AuthenticatedProvider::class)
-        ->decorate('api_platform.state_provider')
-        ->arg('$decorated', service('.inner'))
-        ->public();
+    // Authentication request listener - validates security before API Platform handles request
+    $services->set(AuthenticationRequestListener::class, AuthenticationRequestListener::class)
+        ->tag('kernel.event_listener', [
+            'event' => 'kernel.request',
+            'method' => 'onKernelRequest',
+            'priority' => 8,
+        ]);
 };
