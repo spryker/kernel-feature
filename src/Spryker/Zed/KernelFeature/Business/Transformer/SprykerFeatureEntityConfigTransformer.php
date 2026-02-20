@@ -45,6 +45,10 @@ class SprykerFeatureEntityConfigTransformer
             $dsl['view'][$routeKey] = $this->buildNode($layoutConfig, $components);
         }
 
+        if ($components !== []) {
+            $dsl['view']['_userComponentOverrides'] = $components;
+        }
+
         unset($dsl['view']['layout'], $dsl['view']['components']);
 
         return $dsl;
