@@ -25,9 +25,6 @@ use Spryker\Zed\KernelFeature\Business\Transformer\SprykerFeatureEntityConfigTra
  */
 class SprykerFeatureEntityConfigTransformerTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testTransformTransformsDslWithComponentsAndLayoutIntoViewRoot(): void
     {
         // Arrange
@@ -108,9 +105,6 @@ class SprykerFeatureEntityConfigTransformerTest extends Unit
         $this->assertArrayNotHasKey('layout', $result['view']);
     }
 
-    /**
-     * @return void
-     */
     public function testTransformReturnsDslUnchangedWhenViewIsMissing(): void
     {
         // Arrange
@@ -127,9 +121,6 @@ class SprykerFeatureEntityConfigTransformerTest extends Unit
         $this->assertSame($dsl, $result);
     }
 
-    /**
-     * @return void
-     */
     public function testTransformReturnsDslUnchangedWhenViewAlreadyHasRoot(): void
     {
         // Arrange
@@ -151,9 +142,6 @@ class SprykerFeatureEntityConfigTransformerTest extends Unit
         $this->assertSame($dsl, $result);
     }
 
-    /**
-     * @return void
-     */
     public function testTransformBuildsMultiRouteConfigurationWhenMultipleLayoutsAreProvided(): void
     {
         // Arrange
@@ -201,9 +189,6 @@ class SprykerFeatureEntityConfigTransformerTest extends Unit
         $this->assertArrayNotHasKey('layout', $result['view']);
     }
 
-    /**
-     * @return void
-     */
     public function testTransformUsesRawConfigurationWhenPresent(): void
     {
         // Arrange

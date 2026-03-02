@@ -24,9 +24,6 @@ class FeatureDumpConsole extends Console
 
     protected const DESCRIPTION = 'Dumps SprykerFeature YAML configuration as JSON. Reads from .spryker/features.yml registry and outputs the parsed configuration for debugging and inspection.';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this->setName(static::COMMAND_NAME);
@@ -34,12 +31,6 @@ class FeatureDumpConsole extends Console
         $this->addArgument('featureName', InputArgument::REQUIRED, 'The name of the feature to dump');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $featureName = $input->getArgument('featureName');

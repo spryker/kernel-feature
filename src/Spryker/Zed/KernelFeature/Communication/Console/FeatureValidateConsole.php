@@ -24,9 +24,6 @@ class FeatureValidateConsole extends Console
 
     protected const DESCRIPTION = 'Validates a feature configuration structure and references';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this->setName(static::COMMAND_NAME);
@@ -35,12 +32,6 @@ class FeatureValidateConsole extends Console
         $this->addArgument('entityName', InputArgument::OPTIONAL, 'Optional: specific entity name to validate');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $featureName = $input->getArgument('featureName');

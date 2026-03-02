@@ -33,27 +33,16 @@ class SprykerFeatureRouter implements RouterInterface
         $this->context = new RequestContext();
     }
 
-    /**
-     * @param \Symfony\Component\Routing\RequestContext $context
-     *
-     * @return void
-     */
     public function setContext(RequestContext $context): void
     {
         $this->context = $context;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\RequestContext
-     */
     public function getContext(): RequestContext
     {
         return $this->context;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     public function getRouteCollection(): RouteCollection
     {
         $routeCollection = new RouteCollection();
@@ -123,12 +112,6 @@ class SprykerFeatureRouter implements RouterInterface
         throw new ResourceNotFoundException(sprintf('No routes found for "%s".', $pathinfo));
     }
 
-    /**
-     * @param string $pathinfo
-     * @param string $routePath
-     *
-     * @return bool
-     */
     protected function matchPath(string $pathinfo, string $routePath): bool
     {
         $pathinfo = rtrim($pathinfo, '/');
@@ -173,11 +156,6 @@ class SprykerFeatureRouter implements RouterInterface
         return $this->routeCache;
     }
 
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
     protected function toKebabCase(string $string): string
     {
         return strtolower((string)preg_replace('/([a-z0-9])([A-Z])/', '$1-$2', $string));

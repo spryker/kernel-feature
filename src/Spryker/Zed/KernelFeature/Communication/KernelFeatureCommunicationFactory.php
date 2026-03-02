@@ -19,9 +19,6 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class KernelFeatureCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \Symfony\Component\Routing\RouterInterface
-     */
     public function createSprykerFeatureRouter(): RouterInterface
     {
         return new SprykerFeatureRouter(
