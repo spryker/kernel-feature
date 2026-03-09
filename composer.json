@@ -6,7 +6,7 @@
     "require": {
         "php": ">=8.3",
         "spryker/acl": "^3.0.0",
-        "spryker/api-platform": "^0.4.0",
+        "spryker/api-platform": "^0.6.0",
         "spryker/composable-backoffice-ui": "^0.1.0",
         "spryker/json-schema": "^1.0.0",
         "spryker/kernel": "^3.30.0",
