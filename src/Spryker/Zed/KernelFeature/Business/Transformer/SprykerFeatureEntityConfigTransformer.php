@@ -14,6 +14,10 @@ class SprykerFeatureEntityConfigTransformer
     /**
      * Transforms DSL with "view.components"/"view.layout" into legacy structure with "view.root".
      * If view is already in legacy format or missing, returns DSL unchanged.
+     *
+     * @param array<string, mixed> $dsl
+     *
+     * @return array<string, mixed>
      */
     public function transform(array $dsl): array
     {
@@ -61,6 +65,10 @@ class SprykerFeatureEntityConfigTransformer
      * - layout: { use: 'layout.customer.page' }
      * - layout: { use: ['layout.customer.page', 'layout.customer.edit.page'] }
      * - layout: { ... } (legacy single-layout definition)
+     *
+     * @param array<string, mixed> $layoutDefinition
+     *
+     * @return list<array<string, mixed>>
      */
     protected function normalizeLayouts(array $layoutDefinition): array
     {
@@ -96,6 +104,8 @@ class SprykerFeatureEntityConfigTransformer
     /**
      * Resolves the final view key for a layout based on component virtualRoute.
      * Defaults to "root" when no virtualRoute is provided.
+     *
+     * @param array<string, mixed> $components
      */
     protected function resolveRouteKey(?string $componentId, array $components): string
     {
@@ -113,6 +123,11 @@ class SprykerFeatureEntityConfigTransformer
     /**
      * Builds a node from a layout or component definition.
      * Supports keys: "raw", "use", "overrides", "slots".
+     *
+     * @param array<string, mixed> $definition
+     * @param array<string, mixed> $components
+     *
+     * @return array<string, mixed>
      */
     protected function buildNode(array $definition, array $components): array
     {
@@ -178,6 +193,11 @@ class SprykerFeatureEntityConfigTransformer
      * Processes slots in both supported formats:
      * - map: slotName => [items...]
      * - list: [ { ...slotItem... } ]
+     *
+     * @param array<array-key, mixed> $slots
+     * @param array<string, mixed> $components
+     *
+     * @return list<mixed>
      */
     protected function processSlots(array $slots, array $components): array
     {
@@ -216,6 +236,11 @@ class SprykerFeatureEntityConfigTransformer
      *          { slot: 'actions', ... },
      *          { slot: 'content', ... },
      *      ]
+     *
+     * @param array<string, mixed> $slotsDefinition
+     * @param array<string, mixed> $components
+     *
+     * @return list<array<string, mixed>>
      */
     protected function buildSlots(array $slotsDefinition, array $components): array
     {
@@ -250,6 +275,11 @@ class SprykerFeatureEntityConfigTransformer
      *
      * - For associative arrays: merge per key, with values from $overrides taking precedence.
      * - For numeric-indexed arrays (lists): $overrides replaces $base.
+     *
+     * @param array<array-key, mixed> $base
+     * @param array<array-key, mixed> $overrides
+     *
+     * @return array<array-key, mixed>
      */
     protected function deepMerge(array $base, array $overrides): array
     {
@@ -281,6 +311,8 @@ class SprykerFeatureEntityConfigTransformer
 
     /**
      * Detects if an array is associative.
+     *
+     * @param array<array-key, mixed> $array
      */
     protected function isAssoc(array $array): bool
     {
