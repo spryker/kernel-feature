@@ -27,9 +27,17 @@
     </transfer>
 
     <transfer name="User">
+        <property name="idUser" type="int"/>
     </transfer>
 
     <transfer name="OauthAccessTokenValidationRequest">
+        <property name="type" type="string"/>
+        <property name="accessToken" type="string"/>
+    </transfer>
+
+    <transfer name="OauthAccessTokenValidationResponse">
+        <property name="isValid" type="bool"/>
+        <property name="oauthUserId" type="string"/>
     </transfer>
 
 </transfers>
