@@ -77,6 +77,7 @@ class AuthenticationRequestListener
                 }
             }
         } catch (Throwable) {
+            return null;
         }
 
         return null;
@@ -91,6 +92,7 @@ class AuthenticationRequestListener
                 return $resourceMetadata->getShortName();
             }
         } catch (Throwable) {
+            return null;
         }
 
         return null;
